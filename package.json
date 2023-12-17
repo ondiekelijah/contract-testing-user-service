@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "export HOST=0.0.0.0 && node index.js",
     "test": "jest tests/provider.spec.js",
-    "publish-pact": "node publish.pact.js"
+    "publish-pact": "node publish.pact. js"
   },
   "keywords": [],
   "author": "",
