@@ -8,16 +8,20 @@ class Controller {
       const entities = this.entities;
       // If there are no entities, return a message indicating this
       if (entities.length === 0) {
-        return { status: 'info', message: 'No entities found', entities: [] };
+        return { status: "info", message: "No entities found", entities: [] };
       }
       // If there are entities, return them with a success status
-      return { status: 'success', message: 'Entities successfully retrieved', entities };
+      return {
+        status: "success",
+        message: "Entities successfully retrieved",
+        entities,
+      };
     } catch (error) {
       // Handle any other exceptions that may occur
-      return { status: 'error', message: `Unexpected error: ${error.message}` };
+      return { status: "error", message: `Unexpected error: ${error.message}` };
     }
   }
-  
+
   getById(id) {
     try {
       const entity = this.entities.find(
@@ -25,36 +29,41 @@ class Controller {
       );
       if (!entity) {
         // Return an error message instead of throwing an error
-        return { status: 'error', message: `Entity with id ${id} not found` };
+        return { status: "error", message: `Entity with id ${id} not found` };
       }
       // Return the found entity with a success status
-      return { status: 'success', message: `Entity with id ${id} successfully retrieved`, entity };
+      return {
+        status: "success",
+        message: `Entity with id ${id} successfully retrieved`,
+        entity,
+      };
     } catch (error) {
-      // Handle any other exceptions that may occur
-      return { status: 'error', message: `Unexpected error: ${error.message}` };
+      return { status: "error", message: `Unexpected error: ${error.message}` };
     }
   }
-  
+
   insert(entity) {
     try {
       this.entities.push(entity);
+
       return {
         status: "success",
         message: `Entity with id ${entity.id} was successfully inserted`,
       };
     } catch (error) {
-      // Handle any other exceptions that might occur
       return {
         status: "error",
         message: `Unexpected error occurred: ${error.message}`,
       };
     }
   }
-  
+
   clear(entityId) {
     try {
       const initialLength = this.entities.length;
-      this.entities = this.entities.filter((entity) => String(entity.id) !== String(entityId));
+      this.entities = this.entities.filter(
+        (entity) => String(entity.id) !== String(entityId)
+      );
 
       // Check if an entity was removed
       if (initialLength !== this.entities.length) {
@@ -81,16 +90,16 @@ class Controller {
       const index = this.entities.findIndex(
         (e) => String(e.id) === String(entity.id)
       );
-  
+
       if (index === -1) {
         return {
           status: "error",
           message: `Entity with id ${entity.id} not found`,
         };
       }
-  
+
       this.entities[index] = entity;
-      
+
       return {
         status: "success",
         message: `Entity with id ${entity.id} was successfully updated`,
@@ -121,7 +130,6 @@ class Controller {
     }
   }
 
-  
   getNextId() {
     return this.entities.length + 1;
   }
