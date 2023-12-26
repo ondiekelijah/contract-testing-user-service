@@ -56,8 +56,6 @@ app.get("/users/:id", (req, res) => {
 app.post("/users", (req, res) => {
   const user = req.body;
 
-  console.log("user", user);
-
   if (!user || !user.email) {
     res
       .status(400)
